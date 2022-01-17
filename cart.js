@@ -14,25 +14,27 @@ function readCart(cart) {
 
   cart.forEach((product, position) => {
     document.querySelector("#cart").innerHTML += `
-      <div class="card mb-3 w-100  position-relative" >
+      <div class="card mb-3 w-50  position-relative" >
       <button type="button" class="position-absolute top-0 start-100 translate-middle badge btn btn-danger" onclick="removeFromCart(${position})">X</button>
         <div class="row g-0">
-          <div class="col-md-4">
+          <div class="col-md-12">
             <img src="${product.img}" class="img-fluid rounded-start" alt="...">
           </div>
-          <div class="col-md-8">
+          </div>
+          <div class="row g-0">
+          <div class="col-md-12">
             <div class="card-body d-flex flex-column container">
               <h5 class="card-title mb-3">${product.title}</h5>
-              <div class="d-flex mb-3 justify-content-between">
+              <div class="d-flex mb-3 justify-content-centre">
                 <p class="card-text">Individual price: </p>
                 <span>R${product.price}<span>
               </div>
-              <div class="d-flex mb-3 justify-content-between">
+              <div class="d-flex mb-3 justify-content-centre">
                 <label class="form-label">Quantity:</label>
                 <input type="number" min=1 id="remove${position}" value=${
       product.qty
     } onchange="updateCart(${position})" />
-              </div>
+              </div></div>
               <div class="card-footer bg-white d-flex justify-content-between  p-0 pt-3">
                 <p>Total Cost: </p>
                 <span>R${(
@@ -71,15 +73,10 @@ function updateCart(position) {
 
 // REMOVE
 function removeFromCart(position) {
-  let confirmation = confirm(
-    "Are you sure you want to remove this product from the cart?"
-  );
 
-  if (confirmation) {
     cart.splice(position, 1);
     localStorage.setItem("cart", JSON.stringify(cart));
     readCart(cart);
-  }
 }
 
 // CHECKOUT

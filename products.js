@@ -2,40 +2,40 @@ let products = JSON.parse(localStorage.getItem("products"))
   ? JSON.parse(localStorage.getItem("products"))
   : [
       {
-        title: "bananas",
-        category: "Fruit",
-        price: 9.99,
-        img: "https://i.postimg.cc/FHrjH935/banana.jpg",
+        title: "Black Jeans",
+        category: "Pants",
+        price: 250,
+        img: "/images/blackjeans.png",
       },
       {
-        title: "apples",
-        category: "Fruit",
-        price: 9.99,
-        img: "https://i.postimg.cc/W4Kr8gKT/apple.jpg",
+        title: "Blue Jeans",
+        category: "Pants",
+        price: 175,
+        img: "/images/bluejeans.png",
       },
       {
-        title: "peaches",
-        category: "Fruit",
-        price: 9.99,
-        img: "https://i.postimg.cc/Vv9CzTNk/peach.jpg",
+        title: "Light Grey Jersey",
+        category: "Tops",
+        price: 100,
+        img: "/images/jersey.png",
       },
       {
-        title: "grapes",
-        category: "Fruit",
-        price: 9.99,
-        img: "https://i.postimg.cc/SKw2Cq2K/grapes.jpg",
+        title: "Dark Grey Jersey",
+        category: "Tops",
+        price: 125,
+        img: "/images/jersey2.png",
       },
       {
-        title: "kiwi",
-        category: "Fruit",
-        price: 9.99,
-        img: "https://i.postimg.cc/43TbRzPP/Kiwi-Fruit.jpg",
+        title: "Nubia Gaming Phone",
+        category: "Cellphones",
+        price: 6499.99,
+        img: "/images/redmagic.png",
       },
       {
-        title: "oranges",
-        category: "Fruit",
-        price: 9.99,
-        img: "https://i.postimg.cc/5NKQm8Dy/Oranges.jpg",
+        title: "Samsung Galaxy S21",
+        category: "Cellphones",
+        price: 1399.99,
+        img: "/images/samsungss21.png",
       },
     ];
 
@@ -49,24 +49,21 @@ function readProducts(products) {
   products.forEach((product, position) => {
     document.querySelector("#products").innerHTML += `
       <div class="card">
+      <button type="button" class="btn btn-primary editbtn" data-bs-toggle="modal" data-bs-target="#editProduct${position}" >
+              Edit
+            </button>
         <img src="${product.img}" class="card-img-top" alt="${product.title}">
         <div class="card-body">
           <h5 class="card-title">${product.title}</h5>
           <p class="card-text">R${product.price}</p>
           <div class="d-flex mb-3">
             <input type="number" class="form-control" value=1 min=1 id="addToCart${position}">
-            <button type="button" class="btn btn-secondary ms-3" onclick="addToCart(${position})"><i class="fas fa-cart-plus"></i></button>
           </div>
-          
-          
-          
           </div>
           <div class="d-flex justify-content-end card-footer">
-            <button type="button" class="btn btn-primary w-50" data-bs-toggle="modal" data-bs-target="#editProduct${position}" >
-              Edit
-            </button>
+          <button type="button" class="btn btn-secondary w-50 ms-3" onclick="addToCart(${position})"><i class="fas fa-cart-plus"></i></button>
             <button type="button" class="btn btn-danger w-50 ms-3" onclick="deleteProduct(${position})" >
-              Delete
+              Remove
             </button>
           </div>
       </div>
@@ -108,9 +105,9 @@ function readProducts(products) {
                           name="editCategory${position}"
                           id="editCategory${position}"
                         >
-                          <option value="Fruit">Fruit</option>
-                          <option value="Vegetables">Vegetables</option>
-                          <option value="Meat">Meat</option>
+                          <option value="Pants">Pants</option>
+                          <option value="Tops">Tops</option>
+                          <option value="Cellphones">Cellphones</option>
                         </select>
                       </div>
                       <div class="mb-3">
@@ -225,7 +222,7 @@ function addToCart(position) {
   cart.forEach((product) => {
     if (product.title == products[position].title) {
       alert(
-        `You have successfully added ${qty} ${products[position].title} to the cart`
+        `${qty} ${products[position].title} has been added to cart2`
       );
       product.qty = parseInt(product.qty) + parseInt(qty);
       added = true;
@@ -234,7 +231,7 @@ function addToCart(position) {
   if (!added) {
     cart.push({ ...products[position], qty });
     alert(
-      `You have successfully added ${qty} ${products[position].title} to the cart`
+      `${qty} ${products[position].title} has been added to cart`
     );
   }
 
@@ -289,8 +286,6 @@ function sortPrice() {
   let direction = document.querySelector("#sortPrice").value;
 
   let sortedProducts = products.sort((a, b) => a.price - b.price);
-
-  console.log(sortedProducts);
 
   if (direction == "descending") sortedProducts.reverse();
   readProducts(sortedProducts);

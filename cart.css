@@ -1,0 +1,10 @@
+.btn-primary {
+    color: #fff;
+    background-color: rosybrown;
+  border-color: rosybrown;
+}
+.btn-check:active+.btn-primary, .btn-check:checked+.btn-primary, .btn-primary.active, .btn-primary:active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: rosybrown;
+  border-color: rosybrown;
+}
