@@ -50,7 +50,7 @@ function readProducts(products) {
     document.querySelector("#products").innerHTML += `
       <div class="card">
       <button type="button" class="btn btn-primary editbtn" data-bs-toggle="modal" data-bs-target="#editProduct${position}" >
-              Edit
+      <i class="fas fa-edit"></i>
             </button>
         <img src="${product.img}" class="card-img-top" alt="${product.title}">
         <div class="card-body">
@@ -63,7 +63,7 @@ function readProducts(products) {
           <div class="d-flex justify-content-end card-footer">
           <button type="button" class="btn btn-secondary w-50 ms-3" onclick="addToCart(${position})"><i class="fas fa-cart-plus"></i></button>
             <button type="button" class="btn btn-danger w-50 ms-3" onclick="deleteProduct(${position})" >
-              Remove
+            <i class="far fa-trash-alt"></i>
             </button>
           </div>
       </div>
@@ -141,7 +141,7 @@ function readProducts(products) {
                       </button>
                       <button
                         type="button"
-                        class="btn btn-primary"
+                        class="btn createbtn"
                         data-bs-dismiss="modal"
                         onclick="updateProduct(${position})"
                       >
@@ -188,13 +188,14 @@ function updateProduct(position) {
   let img = document.querySelector(`#editImg${position}`).value;
 
   try {
-    if (!title || !price || !img) throw new Error("Please fill in all fields");
+    if (!title || !price || !img ) throw new Error("Please fill in all fields");
     products[position] = {
       title,
       category,
       price,
       img,
     };
+  
     localStorage.setItem("products", JSON.stringify(products));
     readProducts(products);
   } catch (err) {
